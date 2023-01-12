@@ -1,3 +1,3 @@
-# simple Diary
+# Simple Diary
 
 > with react
