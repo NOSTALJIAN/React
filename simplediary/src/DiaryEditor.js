@@ -1,7 +1,10 @@
 //  DiaryEditor 컴포넌트
-import { useRef, useState } from 'react'; //  핸들링 하기 위해 !
+import React, { useContext, useRef, useState } from 'react'; //  핸들링 하기 위해 !
+import { DiaryDispatchContext } from './App';
 
 const DiaryEditor = () => {
+  const { onCreate } = useContext(DiaryDispatchContext);
+
   const authorInput = useRef();
   const contentInput = useRef();
 
@@ -29,7 +32,13 @@ const DiaryEditor = () => {
       contentInput.current.focus();
       return;
     }
+    onCreate(state.author, state.content, state.emotion);
     alert('저장 성공');
+    setState({
+      author: '',
+      content: '',
+      emotion: 1,
+    });
   };
 
   return (
@@ -75,4 +84,4 @@ const DiaryEditor = () => {
     </div>
   );
 };
-export default DiaryEditor;
+export default React.memo(DiaryEditor);
